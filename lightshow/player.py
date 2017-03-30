@@ -24,19 +24,18 @@ def rand(file, play_time):
 	sleep(play_time)
 	pygame.mixer.music.stop()
 
-def clip(file, start_time, play_time):
+def clip(file, start_time=0, play_time=0):
 	load(file)
 	print 'clipping file ' + file
 	pygame.mixer.music.play(start=start_time)
-	sleep(play_time)
-	pygame.mixer.music.stop()
+	if play_time > 0:
+		sleep(play_time)
+		pygame.mixer.music.stop()
 
 def play(file):
 	load(file)
 	if pygame.mixer.music.get_busy() == False:
         	pygame.mixer.music.play()
-	#while pygame.mixer.music.get_busy():
-	#	sleep(1)
 
 def stop():
         pygame.mixer.music.stop()
