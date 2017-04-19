@@ -6,6 +6,8 @@
 """
 import sys
 import pygame
+import client
+NAME = 'MASTER CODER A'
 
 SCREEN_SIZE   = 640,480
 
@@ -36,6 +38,8 @@ STATE_PLAYING = 1
 STATE_WON = 2
 STATE_GAME_OVER = 3
 
+
+
 class Bricka:
 
     def __init__(self):
@@ -53,7 +57,8 @@ class Bricka:
 
         self.init_game()
 
-        
+        client.join(NAME, BRICK_WIDTH, BRICK_HEIGHT, PADDLE_WIDTH, PADDLE_HEIGHT, BALL_RADIUS)
+
     def init_game(self):
         self.lives = 3
         self.score = 0
@@ -80,9 +85,7 @@ class Bricka:
     def draw_bricks(self):
         for brick in self.bricks:
             pygame.draw.rect(self.screen, BRICK_COLOR, brick)
-     
-
-   
+        
     def check_input(self):
         keys = pygame.key.get_pressed()
         
@@ -156,7 +159,8 @@ class Bricka:
         
             
     def run(self):
-        while 1:            
+        running = True
+        while running:            
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit
@@ -168,15 +172,21 @@ class Bricka:
             if self.state == STATE_PLAYING:
                 self.move_ball()
                 self.handle_collisions()
-            elif self.state == STATE_BALL_IN_PADDLE:
+            elif self.state == STATE_BALL_IN_PADDLE:                
                 self.ball.left = self.paddle.left + self.paddle.width / 2
                 self.ball.top  = self.paddle.top - self.ball.height
                 self.show_message("PRESS SPACE TO LAUNCH THE BALL")
+                running = client.status()
             elif self.state == STATE_GAME_OVER:
                 self.show_message("GAME OVER. PRESS ENTER TO PLAY AGAIN")
+                client.status()                           
+                client.report(NAME, STATE_GAME_OVER)
+                running = False     
             elif self.state == STATE_WON:
                 self.show_message("YOU WON! PRESS ENTER TO PLAY AGAIN")
-                
+                client.status()                     
+                client.report(NAME, STATE_WON)
+                running = False                
             self.draw_bricks()
 
             # Draw paddle
