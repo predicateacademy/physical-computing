@@ -1,5 +1,5 @@
 from time import *
-import player
+from lightshow import player
 
 # play at 24.5 sec for 2.2 sec
 player.clip("goats", 24.5, 2.2)

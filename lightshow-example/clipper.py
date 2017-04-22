@@ -1,4 +1,4 @@
-import player
+from lightshow import player
 import time
 
 file = 'goats'

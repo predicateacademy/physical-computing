@@ -1,6 +1,5 @@
 from time import *
 from lightshow import *
-import player
 
 while True:
 	splitin()
