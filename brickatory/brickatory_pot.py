@@ -8,7 +8,7 @@ import sys
 import pygame
 import client
 import pot
-NAME = 'MASTER CODER A'
+NAME = 'MASTER CODER C'
 
 SCREEN_SIZE   = 640,480
 
@@ -90,7 +90,7 @@ class Bricka:
     def check_input(self):
         keys = pygame.key.get_pressed()
 
-	self.paddle.left = MAX_PADDLE_X - pot.norm(pot.get(), 0, MAX_PADDLE_X)
+        self.paddle.left = MAX_PADDLE_X - pot.norm(pot.get(), 0, MAX_PADDLE_X)
         
         if keys[pygame.K_LEFT]:
             self.paddle.left -= 5
